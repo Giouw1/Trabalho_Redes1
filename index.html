@@ -36,7 +36,7 @@
                 <h3>Alunos:</h3>
                 <ul class="nome-alunos">
                     <div class="aluno">
-                        <li>Giovanni Faleti</li>
+                        <li>Giovanni Faletti</li>
                     </div>
                     <div class="aluno">
                         <li>Jeson Wen </li>
@@ -45,12 +45,11 @@
                         <li>João Batista</li>
                     </div>
                 </ul>
-                <p>Muitas pessoas já ouviram fala do TOR associado a Dark Web, de maneira pejorativa. Nesta página 
-                    iremos desmisticiar toda essa visão negativa relacionada ao TOR, mostrando como são associadas cada 
-                    camada e transporta das redes e onde o TOR está associado. Além disso, iremos mostrar o bônus e potencial 
-                    que pode ser visualizado a partir do uso da rede do TOR. Dividimos em alguns tópicos como a Introdução, 
-                    Aplicação, Problemas, Acesso, Impacto Socio-político, Conclusão e Referências. Antes disso, nós iremos 
-                    esclarecer cada parte da internet para que vocês tenham noção do acesso e das informações que estão sendo disponibilizadas, 
+                <p> Muito debatido desde o seu lançamento, o TOR tem sido associado frequentemente a criminalidade e a
+                    Dark Web, de maneira pejorativa. Esta página tem o intuito de explicar todo o mecanismo e
+                    desmistificar toda essa visão negativa relacionada ao TOR, um protocolo extremamente eficiente na oferta de anonimato.
+                    Dividimos em alguns tópicos como a Introdução, Aplicação, Vulnerabilidades, Acesso, Impacto Socio-político, Conclusão e Referências. 
+                    Antes disso, nós iremos esclarecer cada parte da internet para que vocês tenham noção do acesso e das informações que estão sendo disponibilizadas, 
                     navegadas e compartilhadas. Caso você já conheça sobre as camadas de conteúdo da intenet e deseje ver diretamente o material de estudo clique no botão descer para Introdução, 
                     mas recomendamos que acessem todo o site a fim de que tenham melhor imersão e leiam com atenção cada material produzido.</P>
                 <button class="change-page">
@@ -143,7 +142,9 @@
                 <h2>O que é o TOR?</h2>
                 <p>O nome TOR na verdade é um acrônimo para The Onion Router. A origem do nome se dá pela maneira como a rede funciona, 
                     relacionada a utilização de múltiplas camadas de criptografia para proteger a transmissão que é analogamente 
-                    comparado a camadas de uma cebola. The Onion Router (TOR) é por definição uma rede de anonimato que contém o trafego de mensagens criptografadas, 
+                    comparado a camadas de uma cebola. É um protocolo de anonimato de baixa latência, se comparado com protocolos que reorganizam o fluxo da rede,
+                    e distribuido, se comparado com proxies de anonimato.
+                    The Onion Router (TOR) é por definição uma rede de anonimato que contém o trafego de mensagens criptografadas, 
                     permitindo assim um ambiente mais privativo por meio do anonimato. Essa rede é composta por três nós: 
                     Nó de saída, Nó de guarda e Nó intermediário. A mensagem que o cliente envia é criptografada em camadas inversas 
                     e a medida que a mensagem é transmitida cada nó irá descriptografar a sua camada correspondente.</p>
@@ -169,7 +170,7 @@
             <div class="homepage acess" id="acess">
         <h1>Acesso ao TOR</h1>
         <p>O acesso à rede Tor é feito através da instalação e configuração de um cliente TOR, o processo compreende no estabelecimento de um circuito virutal,
-             vale ressaltar que esse processo exige que o usuário tenha um conhecimento básico sobre redes e criptografia.
+            vale ressaltar que esse processo exige que o usuário tenha um conhecimento básico sobre redes e criptografia.
         A fim de tornar a rede TOR mais acessível, foi desenvolvido o Navegador TOR para que os clientes pudessem experimentar uma navegação privada, sem rastreamente, vigilância ou censura.
         Para acessar ao TOR browser, basta acessar ao site deles 
         (<strong><a href="https://www.torproject.org/download/" target="_blank">https://www.torproject.org/download/</a></strong>) 
@@ -227,7 +228,8 @@
                 <p>O TOR é um protocolo de anonimato de baixa latência que utiliza de saltos para "confundir" os possíveis atacantes da rede,
                     indivíduos que buscam informações sobre a rede. Se diferencia dos proxies de anonimato por ser distribuído, e não depender de um ponto central.
                     Por alto, isso é feito forçando a mensagem passar por nós, que são sistemas finai, que, por só saberem o nó anterior e o próximo nó, não tem
-                    informações suficientes sobre a rede, e não conseguem quebrar o anonimato. (Colocar aqui a imagem de uma rede TOR)
+                    informações suficientes sobre a rede, e não conseguem quebrar o anonimato.
+                    (Colocar aqui a imagem de uma rede TOR)
                         
                 </p>
                 
@@ -241,6 +243,21 @@
                 </p>
                 <h2>Diretórios de Autoridade</h2>
                 <p>
+                
+                Os diretórios de Autoridades (DA's) são um pequeno conjunto de servidores especiais, agem como servidores HTTP, que tem como função principal
+                fornecer uma lista atualizada do nós disponíveis, sua largura de banda e política de saída.
+                Esse método centraliza a confiança do sistema para esse conjunto de servidores, uma vez que o cliente não precisa confiar nos milhares de nós individualmente,
+                ele só precisa confiar nas DA's que não são maliciosas.
+                Apesar dessa centralização, as informações são verificadas através de um processo de votação distribuído e a partir disso é criado o documento de consenso.
+                Nos mecanismos de consenso, é incluído o registro de nó, quando o nó entra online é enviado por ele um 
+                "descritor de servidor" para cada um dos Diretórios de Autoridades.
+                Esse descritor tem todas as informações essenciais sobre o relay, bem como as chaves públicas, endereço IP, portas, largura de banda e política de saída.
+                A cada hora, cada DA verifica a sua lista de descritores e realiza testes de alcançabilidade averiguando os nós que estão online.
+                A partir disso, cada DA publica um "voto" assinado, o qual mostra como está o estado da rede para ele, nesse sentido, 
+                cada DA baixa os "votos" dos outros diretórios e combina-os fazendo uma média ponderada e assim calcula-se o Documento de Consenso. 
+                É claro que esse documento ainda precisa ser considerado válido, e para isso, é necessário que ele seja assinado pela maioria dos diretórios. 
+                Por fim, esse documento é publicado e disponibilizado para que os clientes e nós possam baixar-lo.
+                
                 </p>
 
                 <h2>Por que 3 Nós</h2>
@@ -269,6 +286,7 @@
                     do IP do segundo e terceiro nó, tendo muita informação sobre a rede. Por isso, as camadas de criptografia são essenciais para o TOR:
                     a comunicação do cliente à cada nó é isolada, e a informação sobre a rede é limitada para cada nó.
                     Um outro ponto é que também se protege o IP do cliente de nós mais externos, normalmente de menos segurança.
+                    (imagem da cebola)
                 </p>
                 <h3>Células TOR</h3>
                 <p>
@@ -277,13 +295,15 @@
                     Algumas mensagens importantes de controle são create, para criar o circuito, relay extend, para extender o circuito, relay begin, para começar
                     a comunicação com o servidor, e seus respectivos acks. Relay data também é muito importante, é o comando que envia dados e recebe dados,
                     uma vez a conexão estabelecida. Na imagem abaixo, o primeiro cabeçalho é de células padrão, utilizadas para criar ou destruir um circuito,
-                    e abaixo, relay cells, para estender, truncar, enviar dados, criar uma conexão TCP com o servidor, etc(botar a imagem das celulas TOR).
+                    e abaixo, relay cells, para estender, truncar, enviar dados, criar uma conexão TCP com o servidor, etc.
+                    (botar a imagem das celulas TOR)
                 </p>
                 <h3>A criação do circuito</h3>
                 <p>
                     O Tor implementa um método de construção de circuito incremental, conhecido como telescópio. A construção ocorre a um salto (hop)
                     de cada vez, assim o cliente poderá verificar a cada etapa se o processo foi concluído com êxito. Em termos de segurança e confiabilidade 
                     esse método atual é superior ao  método antigo que construía a "cebola" criptográfica de uma vez só. A imagem a seguir mostra tudo detalhadamente.
+                    (imagem da formação do circuito)
                 </p>
                 <h3>Troca de chaves</h3>
                 <p>
@@ -312,18 +332,52 @@
                 </div>
             </div>
             <div class="homepage" id="problem">
-                <h1>Problemas do TOR</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
-                <h2>Falhas de transporte</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
-                <h2>Problemas de segurança</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
+                <h1>Vulnerabilidades do TOR</h1>
+                <h2>Ataque de correlação fim-a-fim</h2>
+                <p>
+                    É a principal forma de quebra de anonimato em redes TOR. A lógica é correlacionar o fluxo de dados na saída do nó de saída com o fluxo de dados
+                    de entrada do nó de entrada para associar um cliente à um servidor. Visivelmente, precisa-se ter acesso ao nó de entrada e saída, que é o ponto 
+                    que busca-se proteger no design no TOR. Assume-se que para um atacante com muita influência e poder sobre a rede, não há nada que possa ser feito.
+                    Sabendo que esse ataque é inevitável, o design do TOR é feito para evitar que chegue-se à esse ponto de controle sobre a rede.
+                    Existem no geral três tipos de ataque à rede TOR, os passivos, ativos, e à rede de Diretórios de Autoridade.
+                </p>
+                <h2>Ataques passivos</h2>
+                <p>
+                    São os ataques de observação dos pontos críticos da rede TOR: entrada e saída, para quebrar o anonimato. 
+                    Não envolve mudança no tráfego ou nos dados, ou quebrar a criptografia.
+                    </p>
+                <h2>Ataques ativos</h2>
+                <p> O ataque ativo envolve interferir na rede e no tráfego, ou até mesmo quebrar a criptografia do TOR.
+                </p>
+                <h3> Ataque de roubo de identidade</h3>
+                <p>
+                    Esse ataque busca tomar lugar de um nó na rede, roubando o lugar de um nó em uma rede, pegando sua chave privada TLS antes
+                    do circuito ser estendido para criar sua sessão TLS, roubando a identidade do outro nó,
+                    ou roubando o lugar de um nó do diretório de autoridades, pegando sua chave de identidade do nó. Vale ressaltar que roubar chaves
+                    do roteamento cebola tem menos valor, pois elas mudam mais rápido.
+                </p>
+                <h3> Ataque de tagging</h3>
+                <p>
+                    O ataque de "tagging" se baseia em mudar um ou mais pacotes para compreender seu caminho. Isso é bloqueado, no geral, pelo TLS e pelo 
+                    campo digest, mas caso consigam ser burlados, é capaz de verificar o caminho e quebrar o anonimato..
+
+                </p>
+                    
+                <h2>Ataques ao Diretório de Autoridade</h2>
+                <p>
+                    Os ataques de diretório de autoridade se baseiam em introduzir nós comprometidos nos diretórios de autoridade, seja usando só os nós,
+                    ou mexendo nos diretórios de autoridade.
+                </p>
+                <h3>Ataque Sybil</h3>
+                <p>
+                    O ataque Sybil consiste em tentar introduzir um grande número de nós comprometidos no diretório de autoridade,
+                    para ter uma maior probabilidade de ter nós aceitos e comprometer a rede.
+                </p>
+                <h3>Ataque de subversão de Diretórios</h3>
+                <p>
+                    O ponto desse ataque é subverter/controlar Diretórios de Autoridade para conseguir poder nos momentos de voto e introduzir os nós comprometidos.
+                </p>
+
                 <div>
                 <button class="change-page">
                     <a href="#impact">
