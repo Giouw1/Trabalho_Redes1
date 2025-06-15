@@ -121,7 +121,7 @@
                         Nesta camada coexistem siste que utilizam a Internet pública, mas só podem ser acessados de forma direta. 
                         O acesso requer software específico e não pode ser indexado por mecanismos de buscas para garantir o anonimato, 
                         e ai em que entra o TOR. Todo o conteúdo deve ser acessacível através do anonimato total. Como a dark web preza 
-                        pelo aninmato está suscetivel a aplicações maliciosas. Com isso, o conteúdo desta parte está associada a atividades 
+                        pelo anonimato está suscetivel a aplicações maliciosas. Com isso, o conteúdo desta parte está associada a atividades 
                         ilícitas como drogas, armas, mercado de criptomoedas e entre outros produtos relacionados ao mercado negro, por isso apelidade de dark web.</p>
                     <div class="platform-logos">
                         <div class="simb tor"></div>
@@ -223,42 +223,48 @@
                 </div>   
             </div>
             <div class="homepage" id="aplication">
-                
-                <h1>Roteamento cebola</h1>
-                <p>Explicar como é esbelecido o CIRCUITO e criar sub titulos para as funcoes dos nós(guard, middle e exit)</p>
-                
-                <h2>Estabelecendo o circuito</h2>
-                <p> O Tor implementa um método de construção de circuito incremental, conhecido como telescópio. A construção ocorre a um salto (hop)
-                    de cada vez, assim o cliente poderá verificar a cada etapa se o processo foi concluído com êxito. Em termos de segurança e confiabilidade 
-                    esse método atual é superior ao  método antigo que construía a "cebola" criptográfica de uma vez só.
-                </p>
-                <h3>Primeiro salto (Hop)</h3>
-                <p> O cliente seleciona um nó de guarda e envia para ele uma <br><strong>célula de controle create</strong>. O payload desta célula tem a primeira metade do handshake Diffie-Hellman
-                    especificamente o gx, que é criptografado com a chave de cebola pública do nó de guarda. O nó de guarda responde com uma <br><strong>célula created</strong>, a qual tem a outra metade 
-                    do handshake, gy, juntamente com um hash da chave de sessão simétrica resultante, <br><strong>K1 = gxy</strong>. Agora, o cliente e o nó de entrada compartilham uma chave de sessão 
-                    secreta e efêmera/temporária e essa chave criptografará todas as comunicações futuras!
+                <h1>Mecanismo do TOR</h1>
+                <p>O TOR é um protocolo de anonimato de baixa latência que utiliza de saltos para "confundir" os possíveis atacantes da rede,
+                    indivíduos que buscam informações sobre a rede.
+                    Por alto, isso é feito forçando a mensagem passar por nós, que são sistemas finai, que, por só saberem o nó anterior e o próximo nó, não tem
+                    informações suficientes sobre a rede, e não conseguem quebrar o anonimato. (Colocar aqui a imagem de uma rede TOR)
+                        
                 </p>
                 
-                <h3>Segundo salto</h3>
+                <h2>Quem são os nós?</h2>
+                <p> Os nós são sistemas finais inscritos em uma rede distribuída de Diretórios de Autoridade TOR, que contém todos os nós que podem ser usados como pulos
+                    na rede TOR. Esses nós são separados em 3 categorias: Entry Node, Middle Node, Exit Node, e são ofertados pelo servidor ao cliente, que busca fazer
+                    uma comunicação usando TOR. O Middle Node e o Exit Node são escolhidos aleatoriamente, com base em uma distribuição ponderada pela capacidade da banda.
+                    Essa aleatoriedade evita padrões que poderiam quebrar o anonimato. O Entry Node, por outro lado, por ser um nó crítico, que sabe o IP do cliente e sabe o
+                    fluxo de dados que está sendo enviado pelo cliente à rede TOR, é escolhido aleatoriamente com base em uma lista seleta mantida pelo usuário,
+                    que são considerados confiáveis. Os Diretórios de Autoridade TOR tem mecanismos para se manterem atualizados entre si, e para evitarem nós de possíveis atacantes.
+                </p>
+                <h2>Por que 3 Nós</h2>
+                <p> A lógica de usar três nós é manter a característica de ser um protocolo de baixa latência e conseguir ter uma boa garantia de anonimato.
+                    Menos nós ou não garantiriam o anonimato, ou tornaria ataques muito mais simples. Mais nós não aumentam muito o anonimato, mas aumentam a latência da rede.
+                    Por isso três nós: é o mínimo possível para garantir um bom anonimato.
+                </p>
+                
+                <h2> O Design de comunicação do TOR</h2>
                 <p> 
-                    Para adicionar o segundo relay ao circuito, o cliente não precisa se comunicar diretamente com o nó em questão. Em vez disso, ele envia uma <br><strong>célula de controle relay extend</strong> 
-                    através do túnel já criptografado para o primeiro nó. Essa célula relay extend instrui ao primeiro nó a encaminhar uma nova solicitação <br><strong>create</strong> para o segundo nó escolhido. 
-                    O payload do relay extend tem o endereço do segundo nó e uma nova metade do handshake, gx2, onde somente o segundo nó pode descriptografar. 
-                    Assim, o segundo nó responde com uma <br><strong>célula created</strong> com a outra metade do handshake ao primeiro nó, que por sua vez o encapsula em uma célula relay extended enviando de volta
-                    para o cliente pelo túnel. Agora, o cliente e o segundo nó tem uma chave secreta de sessão compartilhada que o primeiro nó não conhece.
+                    A comunicação TOR é feita com base em circuitos virtuais, para que, uma vez estabelecidos, não se necessite do par: IP de origem -IP de destino
+                    para enviar mensagens ao servidor e, principalmente, para receber mensagens do servidor. O servidor, por saber apenas o IP do nó de saída, não 
+                    tem informações suficientes para responder à requisição, a não ser que se use circuitos virtuais: basta identificar o circuito, que a mensagem chega.
+                    O TOR roda sobre TCP/IP, as comunicações entre os nós são feitas usando TLS, protocolo de segurança na camada de transporte,
+                    para garantir a segurança entre a comunicação dos nós, e não apenas o anonimato. Dentro da rede TOR, as mensagens são entregues à camada de aplicação TOR,
+                    que realizam ações como descriptografar, estender circuitos, entre outras.
                 </p>
-                <h3>Terceiro salto</h3>
+                <h3>Células TOR</h3>
                 <p>
-                    No terceiro salto, o processo é o mesmo que ocorre para o segundo salto o cliente envia uma célula relay extend através do túnel que agora tem dois saltos, e o segundo nó é instruído a enviar 
-                    uma solicitação create. Nesse sentido, haverá a troca das metades do handshakes e consequentemente vão compartilhar uma chave de sessão secreta, e, dessa forma o cliente compartilhará três chaves 
-                    secretas, um para cada nó do circuito.
+                    Os pacotes TOR tem um formato e tamanho fixo estabelecidos: são as células TOR. Isso é feito tanto para poder ter as mensagens de controle, quanto
+                    para evitar ter pacotes de tamanho diferentes e acabar fragilizando o anonimato.
+                    Algumas mensagens importantes de controle são create, para criar o circuito, relay extend, para extender o circuito, relay begin, para começar
+                    a comunicação com o servidor, e seus respectivos acks. Relay data também é muito importante, é o comando que envia dados e recebe dados,
+                    uma vez a conexão estabelecida. Na imagem abaixo, o primeiro cabeçalho é de células padrão, utilizadas para criar ou destruir um circuito,
+                    e abaixo, relay cells, para estender, truncar, enviar dados, criar uma conexão TCP com o servidor, etc(botar a imagem das celulas TOR).
                 </p>
-                <h2>Função dos relays</h2>
+                <h3>A criação do circuito</h3>
                 <p></p>
-                <h3>Guard Relay</h3>
-                <p>
-                    
-                </p>
                 <h3>Middle Relay</h3>
                 <p></p>
                 <h3>Exit Relay</h3>
