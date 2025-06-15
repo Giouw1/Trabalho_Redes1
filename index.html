@@ -225,7 +225,7 @@
             <div class="homepage" id="aplication">
                 <h1>Mecanismo do TOR</h1>
                 <p>O TOR é um protocolo de anonimato de baixa latência que utiliza de saltos para "confundir" os possíveis atacantes da rede,
-                    indivíduos que buscam informações sobre a rede.
+                    indivíduos que buscam informações sobre a rede. Se diferencia dos proxies de anonimato por ser distribuído.
                     Por alto, isso é feito forçando a mensagem passar por nós, que são sistemas finai, que, por só saberem o nó anterior e o próximo nó, não tem
                     informações suficientes sobre a rede, e não conseguem quebrar o anonimato. (Colocar aqui a imagem de uma rede TOR)
                         
@@ -237,8 +237,12 @@
                     uma comunicação usando TOR. O Middle Node e o Exit Node são escolhidos aleatoriamente, com base em uma distribuição ponderada pela capacidade da banda.
                     Essa aleatoriedade evita padrões que poderiam quebrar o anonimato. O Entry Node, por outro lado, por ser um nó crítico, que sabe o IP do cliente e sabe o
                     fluxo de dados que está sendo enviado pelo cliente à rede TOR, é escolhido aleatoriamente com base em uma lista seleta mantida pelo usuário,
-                    que são considerados confiáveis. Os Diretórios de Autoridade TOR tem mecanismos para se manterem atualizados entre si, e para evitarem nós de possíveis atacantes.
+                    que são considerados confiáveis. 
                 </p>
+                <h2>Diretórios de Autoridade</h2>
+                <p>
+                </p>
+
                 <h2>Por que 3 Nós</h2>
                 <p> A lógica de usar três nós é manter a característica de ser um protocolo de baixa latência e conseguir ter uma boa garantia de anonimato.
                     Menos nós ou não garantiriam o anonimato, ou tornaria ataques muito mais simples. Mais nós não aumentam muito o anonimato, mas aumentam a latência da rede.
@@ -267,7 +271,7 @@
                 <h3>Células TOR</h3>
                 <p>
                     Os pacotes TOR tem um formato e tamanho fixo estabelecidos: são as células TOR. Isso é feito tanto para poder ter as mensagens de controle, quanto
-                    para evitar ter pacotes de tamanho diferentes e acabar fragilizando o anonimato.
+                    para evitar ter pacotes de tamanho diferentes e acabar fragilizando o anonimato. O TOR permite que em um circuito passe múltiplos streams.
                     Algumas mensagens importantes de controle são create, para criar o circuito, relay extend, para extender o circuito, relay begin, para começar
                     a comunicação com o servidor, e seus respectivos acks. Relay data também é muito importante, é o comando que envia dados e recebe dados,
                     uma vez a conexão estabelecida. Na imagem abaixo, o primeiro cabeçalho é de células padrão, utilizadas para criar ou destruir um circuito,
@@ -280,11 +284,12 @@
                     esse método atual é superior ao  método antigo que construía a "cebola" criptográfica de uma vez só. A imagem a seguir mostra tudo detalhadamente.
                 </p>
                 <h3>Troca de chaves</h3>
-                <p>Como cada relay recebe as suas respectivas chaves para descriptografar a sua camada de criptografia e conseguir se comunicar com os outros relays?
-                   Isso ocorre, basicamente, por meio de um método criptográfico, Troca de Chaves de Diffie-Hellman, o qual
-                   permite que duas partes consigam estabelecer uma chave de criptografia simétrica e secreta entre os relays da rede em um canal de comunicação não seguro,
-                   essa troca de chaves é feita sem que a chave seja efetivamente transmitida diretamente. Então, esse processo garante que mesmo que um invasor intercepte
-                   a comunicação, ele não poderá decifrar nada do conteúdo do fluxo de dados.</p>
+                <p>
+                    Como cada relay recebe as suas respectivas chaves em relação ao cliente para descriptografar a sua camada de criptografia e conseguir se comunicar com os outros relays?
+                    Isso ocorre, basicamente, por meio de um método criptográfico, Troca de Chaves de Diffie-Hellman, o qual permite que
+                    duas partes consigam estabelecer negociar e concordar em um chave, em que cada um dos participante contribui com "uma parte da chave".
+                    Então, esse processo garante que mesmo que um invasor intercepte a comunicação, ele não poderá decifrar nada do conteúdo do fluxo de dados, pois só os dois tem a chave.
+                </p>
                 <div>
                 <button class="change-page">
                     <a href="#acess">
