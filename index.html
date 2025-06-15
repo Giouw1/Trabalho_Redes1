@@ -252,7 +252,17 @@
                     tem informações suficientes para responder à requisição, a não ser que se use circuitos virtuais: basta identificar o circuito, que a mensagem chega.
                     O TOR roda sobre TCP/IP, as comunicações entre os nós são feitas usando TLS, protocolo de segurança na camada de transporte,
                     para garantir a segurança entre a comunicação dos nós, e não apenas o anonimato. Dentro da rede TOR, as mensagens são entregues à camada de aplicação TOR,
-                    que realizam ações como descriptografar, estender circuitos, entre outras.
+                    que realizam ações como descriptografar, estender circuitos, ou seja, compreende e implementa as regras do protocolo Tor. 
+                    
+                </p>
+                
+                <h3>Criptografia Cebola</h3>
+                <p>
+                    A criptografia garante que o cliente possa se comunicar com cada nó isoladamente, em termos de controle, por exemplo e evite a quebra de anonimato:
+                    por exemplo, se eu quero que o segundo nó crie (ou estenda, como será explicado posteriormente)
+                    o circuito para o 3 nó, que é outro IP, seria uma falha e possível quebra de anonimato o primeiro nó ler essa informação, pois ele saberia
+                    do IP do segundo e terceiro nó, tendo muita informação sobre a rede. Por isso, as camadas de criptografia são essenciais para o TOR:
+                    a comunicação do cliente à cada nó é isolada.
                 </p>
                 <h3>Células TOR</h3>
                 <p>
@@ -264,14 +274,12 @@
                     e abaixo, relay cells, para estender, truncar, enviar dados, criar uma conexão TCP com o servidor, etc(botar a imagem das celulas TOR).
                 </p>
                 <h3>A criação do circuito</h3>
-                <p></p>
-                <h3>Middle Relay</h3>
-                <p></p>
-                <h3>Exit Relay</h3>
-                <p></p>
-
-                <h2>Criptografia</h2>
-                <h2>Troca de chaves</h2>
+                <p>
+                    O Tor implementa um método de construção de circuito incremental, conhecido como telescópio. A construção ocorre a um salto (hop)
+                    de cada vez, assim o cliente poderá verificar a cada etapa se o processo foi concluído com êxito. Em termos de segurança e confiabilidade 
+                    esse método atual é superior ao  método antigo que construía a "cebola" criptográfica de uma vez só. A imagem a seguir mostra tudo detalhadamente.
+                </p>
+                <h3>Troca de chaves</h3>
                 <p>Como cada relay recebe as suas respectivas chaves para descriptografar a sua camada de criptografia e conseguir se comunicar com os outros relays?
                    Isso ocorre, basicamente, por meio de um método criptográfico, Troca de Chaves de Diffie-Hellman, o qual
                    permite que duas partes consigam estabelecer uma chave de criptografia simétrica e secreta entre os relays da rede em um canal de comunicação não seguro,
