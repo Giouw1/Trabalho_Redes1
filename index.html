@@ -262,11 +262,13 @@
                 
                 <h3>Criptografia Cebola</h3>
                 <p>
-                    A criptografia garante que o cliente possa se comunicar com cada nó isoladamente, em termos de controle, por exemplo e evite a quebra de anonimato:
-                    por exemplo, se eu quero que o segundo nó crie (ou estenda, como será explicado posteriormente)
+                    É comum tomar a lógica de criptografia cebola como natural e não se perguntar pelo seu motivo, que são dois, principalmente.
+                    A criptografia garante que o cliente possa se comunicar com cada nó isoladamente, e evite a quebra de anonimato:
+                    por exemplo, caso se queira  que o segundo nó crie (ou estenda, como será explicado posteriormente)
                     o circuito para o 3 nó, que é outro IP, seria uma falha e possível quebra de anonimato o primeiro nó ler essa informação, pois ele saberia
                     do IP do segundo e terceiro nó, tendo muita informação sobre a rede. Por isso, as camadas de criptografia são essenciais para o TOR:
-                    a comunicação do cliente à cada nó é isolada.
+                    a comunicação do cliente à cada nó é isolada, e a informação sobre a rede é limitada para cada nó.
+                    Um outro ponto é que também se protege o IP do cliente de nós mais externos, normalmente de menos segurança.
                 </p>
                 <h3>Células TOR</h3>
                 <p>
