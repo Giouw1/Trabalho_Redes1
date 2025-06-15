@@ -232,7 +232,12 @@
                     (Colocar aqui a imagem de uma rede TOR)
                         
                 </p>
-                
+                <h2> TOR hidden Services<h2>
+                    <p>
+                        O TOR hidden services é uma extensão do TOR, em que não somente o cliente passa pelos hops, mas o servidor também, e ambos se encontram em um
+                        ponto de encontro intermediário. Isso aumenta o anonimato, pois saber que A se comunica com B necessita da quebra de 2 sistemas de pulo,
+                        e permite que o servidor também se mantenha anônimo na comunicação.
+                    </p>
                 <h2>Quem são os nós?</h2>
                 <p> Os nós são sistemas finais inscritos em uma rede distribuída de Diretórios de Autoridade TOR, que contém todos os nós que podem ser usados como pulos
                     na rede TOR. Esses nós são separados em 3 categorias: Entry Node, Middle Node, Exit Node, e são ofertados pelo servidor ao cliente, que busca fazer
@@ -249,7 +254,7 @@
                 Esse método centraliza a confiança do sistema para esse conjunto de servidores, uma vez que o cliente não precisa confiar nos milhares de nós individualmente,
                 ele só precisa confiar nas DA's que não são maliciosas.
                 Apesar dessa centralização, as informações são verificadas através de um processo de votação distribuído e a partir disso é criado o documento de consenso.
-                Nos mecanismos de consenso, é incluído o registro de nó, quando o nó entra online é enviado por ele um 
+                Nos mecanismos de consenso, é incluído o registro de nó, que é privado ao nó e contêm sua chave TLS privada, e outras informações relevantes, quando o nó entra online é enviado por ele um 
                 "descritor de servidor" para cada um dos Diretórios de Autoridades.
                 Esse descritor tem todas as informações essenciais sobre o relay, bem como as chaves públicas, endereço IP, portas, largura de banda e política de saída.
                 A cada hora, cada DA verifica a sua lista de descritores e realiza testes de alcançabilidade averiguando os nós que estão online.
@@ -303,6 +308,8 @@
                     O Tor implementa um método de construção de circuito incremental, conhecido como telescópio. A construção ocorre a um salto (hop)
                     de cada vez, assim o cliente poderá verificar a cada etapa se o processo foi concluído com êxito. Em termos de segurança e confiabilidade 
                     esse método atual é superior ao  método antigo que construía a "cebola" criptográfica de uma vez só. A imagem a seguir mostra tudo detalhadamente.
+                    A cada etapa da criação de circuito, se faz um TLS handshake para estabelecer a conexão TLS. Ela é feita com base na chave TLS privada do nó, que é
+                    um dos atributos do nó nos diretórios de autoridade.
                     (imagem da formação do circuito)
                 </p>
                 <h3>Troca de chaves</h3>
@@ -445,17 +452,13 @@
             </div>
             <div class="homepage" id="conclu">
                 <h1>Conclusão</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
-                <h2>Percepção geral</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
+                <p>Nota-se que o TOR é um protocolo muito bem estabelecido e consolidado, "redondo" em seu design e consciente de suas 
+                capacidades e falhas. É capaz, sem atrapalhar muito o desempenho da rede, de fornecer anonimato em uma boa margem de garantia.</p>
+
                 <h2>Perguntas</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit distinctio quaerat, 
-                    delectus, et veritatis sed quod suscipit corrupti nesciunt numquam, officia adipisci
-                    veniam incidunt aut. Qui, soluta laborum. Corrupti, totam.</p>
+                <p>
+                    
+                </p>
                 <div>
                 <button class="change-page">
                     <a href="#problem">
